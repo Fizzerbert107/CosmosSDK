@@ -1,0 +1,100 @@
+syntax = "proto3";
+package mun.claim;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "claim/params.proto";
+import "claim/claim_record.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "mun/x/claim/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/mun/claim/params";
+  }
+  // Queries a list of ClaimRecord items.
+	rpc ClaimRecord(QueryClaimRecordRequest) returns (QueryClaimRecordResponse) {
+		option (google.api.http).get = "/mun/claim/claim_record/{address}";
+	}
+// Queries a list of ModuleAccountBalance items.
+	rpc ModuleAccountBalance(QueryModuleAccountBalanceRequest) returns (QueryModuleAccountBalanceResponse) {
+		option (google.api.http).get = "/mun/claim/module_account_balance";
+	}
+
+// Queries a list of ClaimableForAction items.
+	rpc ClaimableForAction(QueryClaimableForActionRequest) returns (QueryClaimableForActionResponse) {
+		option (google.api.http).get = "/mun/claim/claimable_for_action/{address}";
+	}
+
+// Queries a list of TotalClaimable items.
+	rpc TotalClaimable(QueryTotalClaimableRequest) returns (QueryTotalClaimableResponse) {
+		option (google.api.http).get = "/mun/claim/total_claimable/{address}";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryClaimRecordRequest {
+  string address = 1 [ (gogoproto.moretags) = "yaml:\"sender\"" ];
+}
+
+message QueryClaimRecordResponse {
+  ClaimRecord claim_record = 1 [
+    (gogoproto.moretags) = "yaml:\"claim_record\"",
+    (gogoproto.nullable) = false
+  ];
+}
+
+message QueryModuleAccountBalanceRequest {
+
+}
+
+message QueryModuleAccountBalanceResponse {
+  repeated cosmos.base.v1beta1.Coin moduleAccountBalance = 1 [
+    (gogoproto.moretags) = "yaml:\"coins\"",
+    (gogoproto.nullable) = false,
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+}
+
+
+
+message QueryClaimableForActionRequest {
+   string address = 1 [ (gogoproto.moretags) = "yaml:\"address\"" ];
+  Action action = 2 [ (gogoproto.moretags) = "yaml:\"action\"" ];
+}
+
+message QueryClaimableForActionResponse {
+  repeated cosmos.base.v1beta1.Coin coins = 1 [
+    (gogoproto.moretags) = "yaml:\"coins\"",
+    (gogoproto.nullable) = false,
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+}
+
+message QueryTotalClaimableRequest {
+  string address = 1;
+}
+
+message QueryTotalClaimableResponse {
+  repeated cosmos.base.v1beta1.Coin coins = 1 [
+    (gogoproto.moretags) = "yaml:\"coins\"",
+    (gogoproto.nullable) = false,
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+}
+
+// this line is used by starport scaffolding # 3

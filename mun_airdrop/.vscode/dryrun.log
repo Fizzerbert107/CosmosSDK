@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/yu/mun-airdrops'
+ 
+echo "--> Ensure dependencies have not been modified"
+GO111MODULE=on go mod verify
+go install -mod=readonly -ldflags '-X github.com/cosmos/cosmos-sdk/version.Name=mun -X github.com/cosmos/cosmos-sdk/version.ServerName=mund -X github.com/cosmos/cosmos-sdk/version.Version=0.0.1 -X github.com/cosmos/cosmos-sdk/version.Commit=3a73bdb5465368ed80414c8f094c3ce863a99810' ./cmd/mund-manager
+go install -mod=readonly -ldflags '-X github.com/cosmos/cosmos-sdk/version.Name=mun -X github.com/cosmos/cosmos-sdk/version.ServerName=mund -X github.com/cosmos/cosmos-sdk/version.Version=0.0.1 -X github.com/cosmos/cosmos-sdk/version.Commit=3a73bdb5465368ed80414c8f094c3ce863a99810' ./cmd/mund
+make: Leaving directory '/yu/mun-airdrops'
+ 

@@ -1,0 +1,48 @@
+syntax = "proto3";
+package mun.claim;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "claim/claim_record.proto";
+option go_package = "mun/x/claim/types";
+
+// Msg defines the Msg service.
+service Msg {
+      rpc ClaimFor(MsgClaimFor) returns (MsgClaimForResponse);
+      rpc InitialClaim(MsgInitialClaim) returns (MsgInitialClaimResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgClaimFor {
+  string sender = 1;
+  string address = 2;
+  Action action = 3;
+}
+
+message MsgClaimForResponse {
+  string address = 1;
+   // total initial claimable amount for the user
+   repeated cosmos.base.v1beta1.Coin claimed_amount = 2 [
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins",
+    (gogoproto.nullable) = false,
+    (gogoproto.moretags) = "yaml:\"claimed_amount\""
+  ];
+}
+
+message MsgInitialClaim {
+  string sender = 1;
+}
+
+message MsgInitialClaimResponse {
+  string address = 1;
+  // total initial claimable amount for the user
+  repeated cosmos.base.v1beta1.Coin claimed_amount = 2 [
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins",
+    (gogoproto.nullable) = false,
+    (gogoproto.moretags) = "yaml:\"claimed_amount\""
+  ];
+}
+
+// this line is used by starport scaffolding # proto/tx/message
