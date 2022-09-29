@@ -1,0 +1,57 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Crescent REST and gRPC Gateway docs",
+    "description": "A REST interface for state queries, transactions",
+    "version": "2.0.0"
+  },
+  "apis": [
+    {
+      "url": "./client/docs/swagger_legacy.yaml",
+      "dereference": {
+        "circular": "ignore"
+      }
+    },
+    {
+      "url": "./tmp-swagger-gen/crescent/farming/v1beta1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "FarmingParams"
+        }
+      }
+    },
+    {
+      "url": "./tmp-swagger-gen/crescent/liquidity/v1beta1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "LiquidityParams",
+          "Pool": "LiquidityPool"
+        }
+      }
+    },
+    {
+      "url": "./tmp-swagger-gen/crescent/liquidstaking/v1beta1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "LiquidStakingParams"
+        }
+      }
+    },
+    {
+      "url": "./tmp-swagger-gen/crescent/mint/v1beta1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "MintParams"
+        }
+      }
+    },
+    {
+      "url": "./tmp-swagger-gen/crescent/claim/v1beta1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "ClaimParams"
+        }
+      }
+    }
+  ]
+}
